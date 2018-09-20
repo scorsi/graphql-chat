@@ -1,0 +1,11 @@
+{
+  "author": "scorsi <sylvain.corsini@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "start:watch": "concurrently \"yarn --cwd client start:watch\" \"yarn --cwd server start:watch\"",
+    "start": "concurrently \"yarn --cwd client start\" \"yarn --cwd server start\""
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1"
+  }
+}

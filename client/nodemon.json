@@ -1,0 +1,23 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules",
+    "dist"
+  ],
+  "verbose": true,
+  "execMap": {
+    "tsx": "yarn build",
+    "ts": "yarn build"
+  },
+  "events": {
+    "restart": "osascript -e 'display notification \"Client restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
+  },
+  "watch": [
+    "src/**"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "ts,tsx"
+}
