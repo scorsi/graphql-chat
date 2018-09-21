@@ -10,9 +10,9 @@ services:
     volumes:
       - 'mongodb_data:/bitnami'
     environment:
-      - MONGODB_ROOT_PASSWORD=admin
-      - MONGODB_USERNAME=root
-      - MONGODB_DATABASE=my_database
+      - MONGODB_USERNAME=admin
+      - MONGODB_PASSWORD=admin
+      - MONGODB_DATABASE=main
 
 volumes:
   mongodb_data:
