@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
+import {ApolloProvider} from 'react-apollo';
 
 import Root from './components/Root';
 
@@ -12,7 +12,6 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Root />
-,
   </ApolloProvider>,
   document.getElementById('root'),
 );
