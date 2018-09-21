@@ -5,6 +5,6 @@ insert_final_newline=false
 indent_style=space
 indent_size=2
 
-[*.jsx]
+[{*.js,*.jsx}]
 indent_style=space
 indent_size=2
