@@ -6,9 +6,6 @@
     "dist"
   ],
   "verbose": true,
-  "execMap": {
-    "js": "yarn build"
-  },
   "events": {
     "restart": "osascript -e 'display notification \"Client restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
   },
