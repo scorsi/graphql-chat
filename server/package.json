@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start:watch": "nodemon --config nodemon.json",
-    "start": "babel src --out-dir dist --extensions \".ts,.tsx\" && node dist/index.js"
+    "start": "babel src --out-dir dist --extensions \".js\" && node dist/index.js"
   },
   "dependencies": {
     "apollo-server-express": "^2.1.0",
@@ -14,8 +14,6 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
-    "@babel/preset-typescript": "^7.1.0",
-    "nodemon": "^1.18.4",
-    "typescript": "^3.0.3"
+    "nodemon": "^1.18.4"
   }
 }
