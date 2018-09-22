@@ -3,6 +3,9 @@
     "@babel/env"
   ],
   "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-transform-regenerator",
+    "@babel/plugin-transform-async-to-generator",
     "@babel/proposal-class-properties",
     "@babel/proposal-object-rest-spread"
   ]
