@@ -4,6 +4,7 @@
     "start": "babel src --out-dir dist --extensions \".js\" && node dist/index.js"
   },
   "dependencies": {
+    "apollo-server": "^2.1.0",
     "apollo-server-express": "^2.1.0",
     "bcrypt": "^3.0.1",
     "body-parser": "^1.18.3",
@@ -12,6 +13,7 @@
     "graphql": "^14.0.2",
     "graphql-compose": "^5.2.0",
     "graphql-compose-mongoose": "^5.0.0",
+    "graphql-tools": "^4.0.0",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.2.16"

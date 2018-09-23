@@ -1,28 +1,44 @@
 import express from 'express';
+import http from 'http';
 import {ApolloServer} from 'apollo-server-express';
 import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
-import _ from 'lodash';
+import {startsWith} from 'lodash';
 
-import schema, {User} from './models';
+import {authenticateByToken} from './models/user/controller';
+import schema from './schema';
 
 
-const app = express();
+const expressApp = express();
+const httpServer = http.createServer(expressApp);
 
-new ApolloServer({
+const apolloServer = new ApolloServer({
   schema,
-  context: async ({req}) => {
-    const authorizationHeader = req.headers.authorization || '';
-    if (_.startsWith(authorizationHeader, 'Bearer ')) {
-      const token = authorizationHeader.substring(7);
-      const user = await User.findOne({username: jwt.decode(token).username});
-      console.log({auth: {token, user}});
+  tracing: true,
+  context: async ({req, connection}) => {
+    if (connection) {
+      return {};
+    } else {
+      const authorizationHeader = req.headers.authorization || '';
+      if (startsWith(authorizationHeader, 'Bearer ')) {
+        const token = authorizationHeader.substring(7);
+        const user = await authenticateByToken(token);
+        if (user === null) throw new Error('Unauthorized');
+        return {auth: {token, user}};
+      }
+      return {auth: undefined};
+    }
+  },
+  subscriptions: {
+    onConnect: async ({token}) => {
+      const user = await authenticateByToken(token);
+      if (user === null) throw new Error('Unauthorized');
       return {auth: {token, user}};
     }
-    console.log({auth: null});
-    return {auth: null};
-  },
-}).applyMiddleware({app});
+  }
+});
+
+apolloServer.applyMiddleware({app: expressApp});
+apolloServer.installSubscriptionHandlers(httpServer);
 
 mongoose.connect('mongodb://admin:admin@127.0.0.1:27017/main')
   .then(() => {
@@ -30,10 +46,12 @@ mongoose.connect('mongodb://admin:admin@127.0.0.1:27017/main')
   });
 mongoose.connection.on('error', console.error.bind(console, '🔴  MongoDB connection error:'));
 
-app.listen({port: 4000}, () => {
-    console.log('✅  Server ready at http://localhost:4000');
-    console.log('➡️  GraphQL at http://localhost:4000/graphql');
-    console.log('➡️  Subscription at http://localhost:4000/ws');
+const port = 4000;
+
+httpServer.listen(port, () => {
+    console.log(`✅  Server listening on port ${port}`);
+    console.log(`➡️  GraphQL at http://localhost:${port}${apolloServer.graphqlPath}`);
+    console.log(`➡️  Subscription at ws://localhost:${port}${apolloServer.subscriptionsPath}`);
   }
 );
 
