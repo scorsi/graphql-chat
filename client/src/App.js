@@ -10,7 +10,7 @@ import createClient from './client';
 const App = ({authToken}) => (
   <ApolloProvider client={createClient(authToken)}>
     <BrowserRouter>
-      <Root/>
+      <Root />
     </BrowserRouter>
   </ApolloProvider>
 );

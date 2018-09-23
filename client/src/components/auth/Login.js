@@ -132,4 +132,4 @@ Login.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-export default connect()(withRouter(withStyles(styles)(Login)));
+export default withRouter(connect()(withStyles(styles)(Login)));
