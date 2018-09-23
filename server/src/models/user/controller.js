@@ -22,6 +22,7 @@ const createUser = async (username, password, email) => {
     return null;
   }
 };
+
 const authenticateByPassword = async (username, password) => {
   const user = await User.findOne({username});
   if (!user) return null;
@@ -32,6 +33,7 @@ const authenticateByPassword = async (username, password) => {
     return user;
   }
 };
+
 const authenticateByToken = async (token) => {
   try {
     const {username} = jwt.verify(token, jwtCert);
@@ -41,6 +43,7 @@ const authenticateByToken = async (token) => {
     return null;
   }
 };
+
 const generateToken = (user) => {
   const token = jwt.sign({
     username: user.username
