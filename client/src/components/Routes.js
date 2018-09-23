@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, Route, withRouter} from 'react-router-dom';
 
-import Chat from './Chat';
+import Chat from './chat/Chat';
 import Login from './auth/Login';
 import {logout} from '../actions';
 import Register from './auth/Register';
