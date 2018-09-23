@@ -15,10 +15,10 @@ const schema = `
   }
   
   
-  type Query {
+  extend type Query {
     users: [User]! 
   }
-  type Mutation {
+  extend type Mutation {
     register(username: String!, email: String!, password: String!): RegisterPayload
     authenticate(username: String!, password: String!): AuthenticationPayload
   }
